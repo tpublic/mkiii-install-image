@@ -1,7 +1,7 @@
 FROM docker.bluelight.limited:5000/feingkai/mkiii-clone-image:latest
 
 # ENV RUBY_VER=2.5.3
-ENV RUBY_VER=2.6.0
+ENV RUBY_VER=2.6.3
 
 WORKDIR /home/app/microkube/
 
@@ -13,7 +13,7 @@ RUN echo "Setting default ruby ver" && \
         export PATH="/usr/local/rvm/rubies/ruby-$RUBY_VER/bin:$PATH" && \
         rvm use --default $RUBY_VER && \
         echo "Calling bundle" && \
-        bundle install && \
+        bundle install --jobs=$(nproc) --deployment && \
         chown -R app.app /home/
 
 
