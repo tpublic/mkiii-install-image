@@ -11,10 +11,10 @@ RUN echo "Setting default ruby ver" && \
         . /etc/rvmrc && \
         export PATH="$PATH:/usr/local/rvm/bin/" && \
         export PATH="/usr/local/rvm/rubies/ruby-$RUBY_VER/bin:$PATH" && \
-        rvm use --default $RUBY_VER && \
-        echo "Calling bundle" && \
+        /bin/bash --login -c "rvm use --default ruby-$RUBY_VER && \
+        echo 'Calling bundle' && \
         bundle install --jobs=$(nproc) --deployment && \
-        chown -R app.app /home/
+        chown -R app.app /home/"
 
 
 
